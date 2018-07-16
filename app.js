@@ -11,6 +11,6 @@ app.use(bodyParser.json());
 
 app.use('/api/v1', api);
 
-app.listen(port, () => {
+app.listen(/*port*/3333, () => {
     console.log(`\nAPI is running on port ${port}.`);
 });
