@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "dev": "nodemon app.js"
   },
   "author": "Paulo Santos",
   "license": "ISC",
@@ -14,5 +13,9 @@
     "express": "^4.15.2",
     "jsonwebtoken": "^7.4.0",
     "mysql": "github:mysqljs/mysql"
+  },
+  "devDependencies": {
+    "dotenv": "^6.0.0",
+    "nodemon": "^1.18.2"
   }
 }

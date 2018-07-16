@@ -1,15 +1,16 @@
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
-var api = require('./api/api');
+require('dotenv').config();
 
-require('./env');
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const api = require('./api/api');
+const port = process.env.APP_PORT || 3333;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use('/api', api);
+app.use('/api/v1', api);
 
-app.listen(process.env.PORT, () => {
-    console.log("\nAPI is running on port " + process.env.PORT + ".");
+app.listen(port, () => {
+    console.log(`\nAPI is running on port ${port}.`);
 });

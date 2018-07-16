@@ -1,5 +1,3 @@
-require('../env');
-
 var connection = require('mysql').createConnection({
   host: process.env.MYSQL_HOST,
   user: process.env.MYSQL_USER,

@@ -1,6 +1,6 @@
-var express = require('express');
-var router = express.Router();
-var apiController = require('../controllers/apiController');
+const express = require('express');
+const router = express.Router();
+const apiController = require('../controllers/apiController');
 
 router.post('/signin', apiController.signin);
 router.post('/query', apiController.authApiMiddleware, apiController.query);
