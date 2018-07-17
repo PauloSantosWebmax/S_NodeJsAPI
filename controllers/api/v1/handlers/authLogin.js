@@ -6,11 +6,11 @@ const authLogin = (req, res, next) => {
     res.status(403).send('Unauthorized');
   }
 
-  if (req.body.username != /*process.env.API_USERNAME*/'paulo' || req.body.password != /*process.env.API_PASSWORD*/'123') {
+  if (req.body.username != process.env.API_USERNAME || req.body.password != process.env.API_PASSWORD) {
     res.status(403).send('Unauthorized');
   }
 
-  const token = jwt.sign({}, /*process.env.SECRET_KEY*/'123456', { expiresIn: 4000 });
+  const token = jwt.sign({}, process.env.SECRET_KEY, { expiresIn: 4000 });
 
   res.json(token);
 }
