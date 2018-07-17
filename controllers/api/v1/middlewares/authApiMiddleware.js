@@ -15,7 +15,7 @@ const authApiMiddleware = (req, res, next) => {
   if (token) {
     jwt.verify(token, api.secretKey, (err, decode) => {
       if (err) {
-        res.status(403).send(response(403, 'invalid token'));
+        res.status(403).send(response(403, err.message));
       } else {
         next();
       }
