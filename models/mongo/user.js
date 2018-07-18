@@ -11,8 +11,12 @@ const UserSchema = new Schema({
   updated_at: { type: String, default: '', required: false },
 });
 
-UserSchema.methods.encrypt = (value) => {
+UserSchema.methods.encrypt = function (value) {
   return bcrypt.hashSync(value);
 };
+
+UserSchema.methods.hashCompare = function (value) {
+    return bcrypt.compareSync(value, this.password);
+}
 
 module.exports = mongoose.model('User', UserSchema);

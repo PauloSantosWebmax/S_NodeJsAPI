@@ -2,6 +2,7 @@ const User = $require('/models/mongo/user');
 
 const query = async (req, res, next) => {
 
+/*
   let user = new User();
   user.name = 'Santos';
   user.email = 'tm.paulo.santos@gmail.com';
@@ -9,10 +10,10 @@ const query = async (req, res, next) => {
   user.save();
 
   res.send(user);
-
-  // const users = await User.find();
-
-  // res.send(users);
+*/
+  const user = await User.findOne({ email: 'tm.paulo.santos@gmail.com' });
+  
+  res.send(user);
 }
 
 module.exports = query;
