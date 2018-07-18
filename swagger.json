@@ -21,7 +21,8 @@
     "http"
   ],
   "consumes": [
-    "application/json"
+    "application/json",
+    "application/x-www-form-urlencoded"
   ],
   "produces": [
     "application/json"
@@ -29,7 +30,7 @@
   "paths": {
     "/signin": {
       "post": {
-     "tags": [
+      "tags": [
           "Authentication"
         ],
         "description": "Login the user.",
@@ -38,7 +39,9 @@
             "username": "email",
             "in": "body",
             "description": "User credentials.",
-            "schema": {}
+            "schema": {
+              "$ref": "#/definitions/Auth"
+            }
           }
         ],
         "produces": [
@@ -47,11 +50,30 @@
         "responses": {
           "200": {
             "description": "Token created.",
-            "schema": {}
+            "schema": {
+              "$ref": "#/definitions/Auth"
+            }
           }
         }
       }
     }
   },
-  "definitions": {}
+  "definitions": {
+    "Auth": {
+      "required": [
+        "username",
+        "password"
+      ],
+      "properties": {
+        "password": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "username": {
+          "type": "string",
+          "uniqueItems": true
+        }
+      }
+    }
+  }
 }
