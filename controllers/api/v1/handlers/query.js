@@ -12,7 +12,7 @@ const query = async (req, res, next) => {
   res.send(user);
 */
   const user = await User.findOne({ email: 'tm.paulo.santos@gmail.com' });
-  
+
   res.send(user);
 }
 

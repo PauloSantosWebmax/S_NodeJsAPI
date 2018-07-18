@@ -5,21 +5,20 @@ const response = $require('/utils/response');
 
 const authLogin = async (req, res, next) => {
 
-  if (!req.body.username || !req.body.password) {
-    res.status(403).send('Unauthorized');
+  const { username, password } = req.body;
+
+  if (!username || !password) {
+    res.status(403).send(response(403, 'Unauthorized, missing credentials.'));
   }
 
-  const user = await User.findOne({ email: req.body.username });
+  const user = await User.findOne({ email: username });
 
   if (user == null || user instanceof Error) {
     return res.send(response(200, 'Can\'t login with those details.', null));
   }
 
-  if (req.body.username != user.email || !user.hashCompare(req.body.password)) {
-    return res.status(403).send({
-      status: 403,
-      message: 'Unauthorized',
-    });
+  if (username != user.email || !user.hashCompare(password)) {
+    return res.status(403).send(response(403, 'Unauthorized, login failed.'));
   } else {
 
     const token = jwt.sign({
@@ -28,7 +27,7 @@ const authLogin = async (req, res, next) => {
       exp: Math.floor(Date.now() / 1000) + (60 * 60), // expires in 1 hour
     }, api.secretKey);
 
-    res.json(token);
+    res.json(response(200, 'Authentication succefully.', { token }));
   }
 }
 

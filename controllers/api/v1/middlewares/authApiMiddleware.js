@@ -1,16 +1,16 @@
 const { api } = $require('/configs');
+const response = $require('/utils/response');
 const jwt = require('jsonwebtoken');
-
-const response = (status, message) => {
-  return {
-    status: status,
-    message: message
-  }
-};
 
 const authApiMiddleware = (req, res, next) => {
 
-  const token = req.body.token || req.headers['authorization'].split('Bearer ')[1];
+  let token = null;
+
+  if (req.body.token) {
+    token = req.body.token;
+  } else if (req.headers['authorization']) {
+    token = req.headers['authorization'].split('Bearer ')[1]
+  }
 
   if (token) {
     jwt.verify(token, api.secretKey, (err, decode) => {
@@ -21,7 +21,7 @@ const authApiMiddleware = (req, res, next) => {
       }
      });
   } else {
-    res.status(403).send(response(403, 'missing token'));
+    res.status(403).send(response(403, 'Missing token.'));
   }
 };
 

@@ -9,6 +9,8 @@ const UserSchema = new Schema({
   password: { type: String, required: true },
   created_at: { type: String, default: Date.now(), required: true },
   updated_at: { type: String, default: '', required: false },
+}, {
+  versionKey: false
 });
 
 UserSchema.methods.encrypt = function (value) {
