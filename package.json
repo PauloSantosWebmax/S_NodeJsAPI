@@ -14,7 +14,9 @@
     "express": "^4.15.2",
     "jsonwebtoken": "^7.4.0",
     "mongoose": "^5.2.4",
-    "mysql": "github:mysqljs/mysql"
+    "mysql": "github:mysqljs/mysql",
+    "swagger-express": "^1.0.5",
+    "swagger-ui-express": "^3.0.10"
   },
   "devDependencies": {
     "dotenv": "^6.0.0",
