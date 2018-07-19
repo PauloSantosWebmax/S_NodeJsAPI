@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use('/api/v1/documentation', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-app.use('/api/v1', api);
+app.use('/api/v1/auth', api);
 
 app.listen(port, () => {
     console.log(`\nAPI is running on port ${port}.`);

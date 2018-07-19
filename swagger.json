@@ -4,13 +4,17 @@
     "version": "1.0.0",
     "title": "API",
     "description": "Application API",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "tm.paulo.santos@gmail.com"
+    },
     "license": {
       "name": "MIT",
       "url": "https://opensource.org/licenses/MIT"
     }
   },
   "host": "localhost:3000",
-  "basePath": "/api/v1",
+  "basePath": "/api/v1/",
   "tags": [
     {
       "name": "Authentication",
@@ -28,28 +32,31 @@
     "application/json"
   ],
   "paths": {
-    "/signin": {
+    "/auth": {
       "post": {
       "tags": [
-          "Authentication"
-        ],
-        "description": "Login the user.",
-        "parameters": [
-          {
-            "username": "email",
-            "in": "body",
-            "description": "User credentials.",
-            "schema": {
-              "$ref": "#/definitions/Auth"
-            }
+        "Authentication"
+      ],
+      "description": "Login the user.",
+      "parameters": [
+        {
+          "username": "email",
+          "password": "password",
+          "in": "body",
+          "name": "body",
+          "description": "User credentials.",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Auth"
           }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
+        }
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "responses": {
           "200": {
-            "description": "Token created.",
+            "description": "Create jwt token that expires in one hour.",
             "schema": {
               "$ref": "#/definitions/Auth"
             }
