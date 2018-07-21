@@ -63,6 +63,37 @@
           }
         }
       }
+    },
+    "/auth/verify": {
+      "post": {
+      "tags": [
+        "Authentication"
+      ],
+      "description": "Verify if token is valid.",
+      "parameters": [
+        {
+          "token": "token",
+          "in": "body",
+          "name": "body",
+          "description": "JWT token.",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Verify"
+          }
+        }
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "responses": {
+          "200": {
+            "description": "Check if jwt token is valid.",
+            "schema": {
+              "$ref": "#/definitions/Verify"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -77,6 +108,17 @@
           "uniqueItems": true
         },
         "username": {
+          "type": "string",
+          "uniqueItems": true
+        }
+      }
+    },
+    "Verify": {
+      "required": [
+        "token"
+      ],
+      "properties": {
+        "token": {
           "type": "string",
           "uniqueItems": true
         }

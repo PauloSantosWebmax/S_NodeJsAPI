@@ -1,14 +1,20 @@
 const jwt = require('jsonwebtoken');
-const { api } = $require('/configs');
 const User = $require('/models/mongo/user');
 const response = $require('/utils/response');
+const { api } = $require('/configs');
+const { validationResult } = require('express-validator/check');
 
-const authLogin = async (req, res, next) => {
+const authLogin = async (req, res) => {
 
   const { username, password } = req.body;
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
 
   if (!username || !password) {
-    res.status(403).send(response(403, 'Unauthorized, missing credentials.'));
+    return res.status(403).send(response(403, 'Unauthorized, missing credentials.'));
   }
 
   const user = await User.findOne({ email: username });
@@ -27,7 +33,7 @@ const authLogin = async (req, res, next) => {
       exp: Math.floor(Date.now() / 1000) + (60 * 60), // expires in 1 hour
     }, api.secretKey);
 
-    res.json(response(200, 'Authentication succefully.', { token }));
+    return res.json(response(200, 'Authentication succefully.', { token }));
   }
 }
 
